@@ -2,6 +2,7 @@ package com.bs.travelagency.controller;
 
 import com.bs.travelagency.beanValidation.UserInformationValidation;
 import com.bs.travelagency.entity.User;
+import com.bs.travelagency.service.IUserSetupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,9 @@ public class UserController {
     //region for private methods
     @Autowired
     private UserInformationValidation userInformationValidation;
+
+    @Autowired
+    private IUserSetupService userSetupService;
     //endregion
 
     /**
@@ -58,6 +62,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "userRegistration";
         }
+        userSetupService.save(user);
         return "redirect:/login";
     }
 }
