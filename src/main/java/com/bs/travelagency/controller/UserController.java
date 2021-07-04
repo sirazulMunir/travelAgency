@@ -1,6 +1,8 @@
 package com.bs.travelagency.controller;
 
+import com.bs.travelagency.beanValidation.UserInformationValidation;
 import com.bs.travelagency.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @PreAuthorize("")
 public class UserController {
+
+    //region for private methods
+    @Autowired
+    private UserInformationValidation userInformationValidation;
+    //endregion
 
     /**
      * Redirect to login
@@ -29,14 +36,28 @@ public class UserController {
     }
 
     /**
+     * Redirect to registration page
+     * @param model : Model
+     * */
+    @GetMapping("/registration")
+    public String registration(Model model) {
+        model.addAttribute("userForm", new User());
+        return "userRegistration";
+    }
+
+    /**
      * Save user Information
      *
      * @param user          : User
      * @param bindingResult : BindingResult
      * @return if Save information success then login page else userRegistration page
      */
-    @GetMapping("/registration")
+    @PostMapping("/registration")
     public String registration(@ModelAttribute("userForm") User user, BindingResult bindingResult) {
-        return "userRegistration";
+        userInformationValidation.validate(user, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "userRegistration";
+        }
+        return "redirect:/login";
     }
 }
