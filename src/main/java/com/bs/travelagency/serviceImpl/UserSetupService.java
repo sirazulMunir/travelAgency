@@ -1,12 +1,15 @@
 package com.bs.travelagency.serviceImpl;
 
 import com.bs.travelagency.entity.User;
+import com.bs.travelagency.repository.IRoleRepository;
 import com.bs.travelagency.repository.IUserSetupRepository;
 import com.bs.travelagency.service.IUserSetupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
 
 @Service
 public class UserSetupService implements IUserSetupService {
@@ -19,6 +22,10 @@ public class UserSetupService implements IUserSetupService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Autowired
+    @Qualifier(value = "roleRepository")
+    private IRoleRepository roleRepository;
+
     //region for public methods
 
     /**
@@ -29,6 +36,7 @@ public class UserSetupService implements IUserSetupService {
     @Override
     public void save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setRole(new HashSet<>(roleRepository.findAll()));
         userSetupRepository.saveAndFlush(user);
     }
 

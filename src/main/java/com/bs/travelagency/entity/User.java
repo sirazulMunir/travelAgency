@@ -2,6 +2,7 @@ package com.bs.travelagency.entity;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -22,13 +23,28 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @ManyToMany
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> role;
+
     @Transient
     private String passwordConfirm;
+
     //endregion
 
-    //region for getter setter
+
     public User() {
     }
+
+    public User(Long id, String name, String email, String password, Set<Role> role) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    //region for getter setter
 
     public Long getId() {
         return id;
@@ -69,21 +85,15 @@ public class User {
     public void setPasswordConfirm(String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
     }
-    //endregion
 
-
-    //region for equals and hasCode
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(passwordConfirm, user.passwordConfirm);
+    public Set<Role> getRole() {
+        return role;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, email, password, passwordConfirm);
+    public void setRole(Set<Role> role) {
+        this.role = role;
     }
+
     //endregion
+
 }
