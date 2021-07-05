@@ -3,6 +3,8 @@ package com.bs.travelagency.controller;
 import com.bs.travelagency.beanValidation.UserInformationValidation;
 import com.bs.travelagency.entity.User;
 import com.bs.travelagency.service.IUserSetupService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UserController {
 
     //region for private methods
+    private static final Logger logger = LogManager.getLogger(UserController.class);
+
     @Autowired
     private UserInformationValidation userInformationValidation;
 
@@ -24,6 +28,7 @@ public class UserController {
     private IUserSetupService userSetupService;
     //endregion
 
+    //region for public methods
     /**
      * Redirect to login
      *
@@ -65,4 +70,5 @@ public class UserController {
         userSetupService.save(user);
         return "redirect:/login";
     }
+    //endregion
 }
