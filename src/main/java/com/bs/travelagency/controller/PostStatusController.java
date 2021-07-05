@@ -3,6 +3,7 @@ package com.bs.travelagency.controller;
 import com.bs.travelagency.dto.PostStatusDTO;
 import com.bs.travelagency.dto.StatusDTO;
 import com.bs.travelagency.entity.Location;
+import com.bs.travelagency.entity.Status;
 import com.bs.travelagency.service.ILocationService;
 import com.bs.travelagency.service.IPostStatusService;
 import org.apache.logging.log4j.LogManager;
@@ -12,6 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,12 +37,14 @@ public class PostStatusController {
 
     /**
      * After log in redirect to home page
+     *
+     * @param model : Model
      */
     @GetMapping({"/", "home"})
     public String index(HttpServletRequest request, Model model) {
         logger.info("welcome controller");
-        /*List<StatusDTO> statusDTOList = postService.getAllPublicPost(request);
-        model.addAttribute("statusList", statusDTOList);*/
+        List<StatusDTO> statusDTOList = postStatusService.getAllPublicPost(request);
+        model.addAttribute("statusList", statusDTOList);
         return "home";
     }
 
@@ -68,6 +72,7 @@ public class PostStatusController {
      */
     @PostMapping(value = "/postStatus")
     public String newPostSave(PostStatusDTO postStatusDTO, HttpServletRequest request, Model model) {
+        logger.info("Post a status");
         boolean isValid = true;
         if (postStatusDTO.getPost() == null || "".equals(postStatusDTO.getPost())) {
             model.addAttribute("nullPost", "Post is empty");
@@ -93,5 +98,58 @@ public class PostStatusController {
         return "postStatus";
     }
 
+    /**
+     * Get all personal post by email address
+     *
+     * @param model   : Model
+     * @param request : HttpServletRequest
+     * @return List<StatusDTO>
+     */
+    @GetMapping(value = "/personalPosts")
+    public String getPersonalPost(Model model, HttpServletRequest request) {
+        logger.info("Get personal posts");
+        List<StatusDTO> statusDTOList = postStatusService.findByUserEmail(request.getUserPrincipal().getName());
+        model.addAttribute("personalPostList", statusDTOList);
+        return "personalPosts";
+    }
+
+    /**
+     * Get Post information by postID
+     *
+     * @param postId : Long
+     * @param model  : Model
+     */
+    @GetMapping(value = "/editPost/{postId}")
+    public String editPost(@PathVariable Long postId, Model model) {
+        logger.info("Edit personal posts");
+        Status status = postStatusService.findById(postId);
+        model.addAttribute("postId", status.getId());
+        model.addAttribute("post", status.getPost());
+        return "editPost";
+    }
+
+    /**
+     * Update post information
+     *
+     * @param statusDTO : StatusDTO
+     * @param request   : HttpServletRequest
+     * @param model     : Model
+     */
+    @PostMapping(value = "/updatePost")
+    public String updatePost(StatusDTO statusDTO, HttpServletRequest request, Model model) {
+        logger.info("Edit personal posts");
+        boolean isValid = true;
+        if (statusDTO.getPost() == null || "".equals(statusDTO.getPost())) {
+            isValid = false;
+            model.addAttribute("error", "Post can not be empty");
+        }
+        if (isValid) {
+            postStatusService.updatePost(statusDTO, request);
+            logger.info("Post successfully updated");
+            return "redirect:/personalPosts";
+        }
+        model.addAttribute("postId", statusDTO.getPostId());
+        return "editPost";
+    }
     //endregion
 }

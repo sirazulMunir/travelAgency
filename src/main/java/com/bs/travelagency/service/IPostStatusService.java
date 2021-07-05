@@ -11,4 +11,14 @@ public interface IPostStatusService {
 
     public void save(PostStatusDTO postStatusDTO, HttpServletRequest request);
 
+    List<StatusDTO> findByUserEmail(String email);
+
+    public Status findById(Long postId);
+
+    public void updatePost(StatusDTO statusDTO, HttpServletRequest request);
+
+    public void updatePrivacy(StatusDTO statusDTO, HttpServletRequest request);
+
+    public List<StatusDTO> getAllPublicPost(HttpServletRequest request);
+
 }

@@ -25,6 +25,25 @@
                 <div class="col-md-12">
                     <div class="margin-left-news-feed"><h3>News Feed</h3></div>
                 </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="question-box">
+                            <c:forEach var="status" items="${statusList}">
+                                <div class="single-question-box">
+                                    <ul class="listStyle">
+                                        <li>------------------------------------------------------------</li>
+                                        <li><i class="glyphicon glyphicon-user"></i>
+                                            <strong>${status.getUserName()}</strong></li>
+                                        <li><i class="glyphicon glyphicon-edit"></i> ${status.getPost()}</li>
+                                        <li><i class="glyphicon glyphicon-map-marker"></i> at ${status.getLocation()}</li>
+                                        <li>------------------------------------------------------------</li>
+                                    </ul>
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-md-2"></div>

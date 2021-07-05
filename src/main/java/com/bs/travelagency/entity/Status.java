@@ -29,19 +29,19 @@ public class Status {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "posted_at")
-    private Date postedAt = new Date();
+    private Date postDate = new Date();
     //endregion
 
     //region for constructor
     public Status() {
     }
 
-    public Status(String post, int postPrivacy, User user, Location location, Date postedAt) {
+    public Status(String post, int postPrivacy, User user, Location location, Date postDate) {
         this.post = post;
         this.postPrivacy = postPrivacy;
         this.user = user;
         this.location = location;
-        this.postedAt = postedAt;
+        this.postDate = postDate;
     }
 
     public Status(String post, int postPrivacy, User user) {
@@ -92,12 +92,12 @@ public class Status {
         this.location = location;
     }
 
-    public Date getPostedAt() {
-        return postedAt;
+    public Date getPostDate() {
+        return postDate;
     }
 
-    public void setPostedAt(Date postedAt) {
-        this.postedAt = postedAt;
+    public void setPostDate(Date postDate) {
+        this.postDate = postDate;
     }
     //endregion
 }
