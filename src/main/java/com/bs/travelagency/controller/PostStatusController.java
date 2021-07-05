@@ -189,5 +189,20 @@ public class PostStatusController {
         model.addAttribute("postId", statusDTO.getPostId());
         return "changePrivacy";
     }
+
+    /**
+     * Delete post
+     *
+     * @param postId  : Long
+     * @param model   : Model
+     * @param request : HttpServletRequest
+     */
+    @GetMapping(value = "/deletePost/{postId}")
+    public String deletePost(@PathVariable int postId, Model model, HttpServletRequest request) {
+        postStatusService.deletePost(postId);
+        List<StatusDTO> statusDTOList = postStatusService.findByUserEmail(request.getUserPrincipal().getName());
+        model.addAttribute("personalPostList", statusDTOList);
+        return "personalPosts";
+    }
     //endregion
 }

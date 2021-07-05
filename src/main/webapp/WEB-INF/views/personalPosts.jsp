@@ -37,6 +37,7 @@
                     <td>Posted At</td>
                     <td>Edit Post</td>
                     <td>Change Privacy</td>
+                    <td>Delete Post</td>
                 </tr>
                 </thead>
 
@@ -57,6 +58,7 @@
                         <td> <fmt:formatDate pattern="dd-MMMM-yyyy" value="${post.getPostDate()}" /> </td>
                         <td><a href="/editPost/${post.getPostId()}">Edit</a></td>
                         <td><a href="/changePrivacy/${post.getPostId()}">Change</a></td>
+                        <td><a href="/deletePost/${post.getPostId()}">Delete</a></td>
                     </tr>
                 </c:forEach>
                 </tbody>

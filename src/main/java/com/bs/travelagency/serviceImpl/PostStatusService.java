@@ -132,6 +132,19 @@ public class PostStatusService implements IPostStatusService {
     }
 
     /**
+     * Delete post
+     *
+     * @param postId : Long
+     */
+    @Override
+    public void deletePost(int postId) {
+        Status status = findById(postId);
+        if (status != null) {
+            postStatusRepository.deleteById(status.getId());
+        }
+    }
+
+    /**
      * Get all personal post by email address
      *
      * @param email : String
@@ -148,6 +161,8 @@ public class PostStatusService implements IPostStatusService {
 
         return statusDTOList;
     }
+
+
     //endregion
 
 }

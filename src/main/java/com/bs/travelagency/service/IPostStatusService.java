@@ -21,4 +21,5 @@ public interface IPostStatusService {
 
     public List<StatusDTO> getAllPublicPost(HttpServletRequest request);
 
+    public void deletePost(int postId);
 }
