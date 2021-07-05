@@ -27,6 +27,9 @@ public class User {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> role;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Status> status;
+
     @Transient
     private String passwordConfirm;
 
@@ -36,12 +39,13 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String name, String email, String password, Set<Role> role) {
+    public User(Long id, String name, String email, String password, Set<Role> role, Set<Status> status) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.role = role;
+        this.status = status;
     }
 
     //region for getter setter
@@ -92,6 +96,14 @@ public class User {
 
     public void setRole(Set<Role> role) {
         this.role = role;
+    }
+
+    public Set<Status> getStatus() {
+        return status;
+    }
+
+    public void setStatus(Set<Status> status) {
+        this.status = status;
     }
 
     //endregion
