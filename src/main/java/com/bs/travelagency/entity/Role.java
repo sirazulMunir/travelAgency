@@ -12,7 +12,7 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "role_id")
-    private Long id;
+    private int id;
 
     @Column(name = "role_name")
     private String role;
@@ -32,15 +32,12 @@ public class Role {
     //endregion
 
     //region for getter setter
-    public Role(String role) {
-        this.role = role;
-    }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -59,6 +56,7 @@ public class Role {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
+
     //endregion
 
 }

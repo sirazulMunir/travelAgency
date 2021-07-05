@@ -12,7 +12,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
-    private Long id;
+    private int id;
 
     @Column(name = "name")
     private String name;
@@ -39,7 +39,7 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String name, String email, String password, Set<Role> role, Set<Status> status) {
+    public User(int id, String name, String email, String password, Set<Role> role, Set<Status> status) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -50,11 +50,11 @@ public class User {
 
     //region for getter setter
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

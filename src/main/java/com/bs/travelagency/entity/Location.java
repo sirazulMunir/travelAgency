@@ -11,7 +11,7 @@ public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "location_id")
-    private Long id;
+    private int id;
 
     @Column(name = "location_name")
     private String location;
@@ -32,15 +32,12 @@ public class Location {
 
 
     //region for getter setter
-    public Location(String location) {
-        this.location = location;
-    }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -59,5 +56,6 @@ public class Location {
     public void setStatuses(Set<Status> statuses) {
         this.statuses = statuses;
     }
+
     //endregion
 }

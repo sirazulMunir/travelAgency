@@ -9,5 +9,5 @@ public interface ILocationService {
 
     public List<Location> getAllLocation();
 
-    public Optional<Location> getLocationById(Long locationId);
+    public Optional<Location> getLocationById(int locationId);
 }

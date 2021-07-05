@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository(value = "postStatusRepository")
-public interface IPostStatusRepository extends JpaRepository<Status, Long> {
+public interface IPostStatusRepository extends JpaRepository<Status, Integer> {
 
     List<Status> findByUserEmail(String email);
 

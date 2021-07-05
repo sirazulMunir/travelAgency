@@ -5,7 +5,7 @@ import java.util.Date;
 public class StatusDTO {
 
     //region for private variables
-    private Long postId;
+    private int postId;
     private String post;
     private String location;
     private int postPrivacy;
@@ -17,7 +17,7 @@ public class StatusDTO {
     public StatusDTO() {
     }
 
-    public StatusDTO(Long postId, String post, String location, int postPrivacy, Date postDate) {
+    public StatusDTO(int postId, String post, String location, int postPrivacy, Date postDate) {
         this.postId = postId;
         this.post = post;
         this.location = location;
@@ -25,7 +25,7 @@ public class StatusDTO {
         this.postDate = postDate;
     }
 
-    public StatusDTO(Long postId, String post, String location, int postPrivacy) {
+    public StatusDTO(int postId, String post, String location, int postPrivacy) {
         this.postId = postId;
         this.post = post;
         this.location = location;
@@ -35,11 +35,11 @@ public class StatusDTO {
 
 
     //region for getter setter
-    public Long getPostId() {
+    public int getPostId() {
         return postId;
     }
 
-    public void setPostId(Long postId) {
+    public void setPostId(int postId) {
         this.postId = postId;
     }
 

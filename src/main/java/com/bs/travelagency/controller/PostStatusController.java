@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -79,11 +80,6 @@ public class PostStatusController {
             isValid = false;
         }
 
-        if (postStatusDTO.getLocation() == null) {
-            model.addAttribute("nullLocation", "Location is empty");
-            isValid = false;
-        }
-
         if (postStatusDTO.getPostPrivacy() == null) {
             model.addAttribute("nullPrivacy", "Privacy is empty");
             isValid = false;
@@ -120,7 +116,7 @@ public class PostStatusController {
      * @param model  : Model
      */
     @GetMapping(value = "/editPost/{postId}")
-    public String editPost(@PathVariable Long postId, Model model) {
+    public String editPost(@PathVariable int postId, Model model) {
         logger.info("Edit personal posts");
         Status status = postStatusService.findById(postId);
         model.addAttribute("postId", status.getId());
@@ -159,7 +155,7 @@ public class PostStatusController {
      * @param model  : Model
      */
     @GetMapping(value = "/changePrivacy/{postId}")
-    public String changePrivacy(@PathVariable Long postId, Model model) {
+    public String changePrivacy(@PathVariable int postId, Model model) {
         logger.info("Get post privacy");
         Status status = postStatusService.findById(postId);
         model.addAttribute("postId", status.getId());

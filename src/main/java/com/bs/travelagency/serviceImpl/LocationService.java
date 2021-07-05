@@ -35,7 +35,7 @@ public class LocationService implements ILocationService {
      * @param locationId : Long
      */
     @Override
-    public Optional<Location> getLocationById(Long locationId) {
+    public Optional<Location> getLocationById(int locationId) {
         return locationRepository.findById(locationId);
     }
     //endregion

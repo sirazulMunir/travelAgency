@@ -60,7 +60,7 @@ public class PostStatusService implements IPostStatusService {
      * @return Status entity
      */
     @Override
-    public Status findById(Long postId) {
+    public Status findById(int postId) {
         return postStatusRepository.findById(postId).get();
     }
 

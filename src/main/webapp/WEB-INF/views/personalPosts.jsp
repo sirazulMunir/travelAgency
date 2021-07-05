@@ -1,6 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +54,7 @@
                                 Public
                             </c:otherwise>
                         </c:choose></td>
-                        <td>${post.getPostDate()}</td>
+                        <td> <fmt:formatDate pattern="dd-MMMM-yyyy" value="${post.getPostDate()}" /> </td>
                         <td><a href="/editPost/${post.getPostId()}">Edit</a></td>
                         <td><a href="/changePrivacy/${post.getPostId()}">Change</a></td>
                     </tr>

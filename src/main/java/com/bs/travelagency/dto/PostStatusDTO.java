@@ -4,7 +4,7 @@ public class PostStatusDTO {
 
     //region for private variables
     private String post;
-    private Long location;
+    private int location;
     private Integer postPrivacy;
     //endregion
 
@@ -12,7 +12,7 @@ public class PostStatusDTO {
     public PostStatusDTO() {
     }
 
-    public PostStatusDTO(String post, Long location, Integer postPrivacy) {
+    public PostStatusDTO(String post, int location, Integer postPrivacy) {
         this.post = post;
         this.location = location;
         this.postPrivacy = postPrivacy;
@@ -28,11 +28,11 @@ public class PostStatusDTO {
         this.post = post;
     }
 
-    public Long getLocation() {
+    public int getLocation() {
         return location;
     }
 
-    public void setLocation(Long location) {
+    public void setLocation(int location) {
         this.location = location;
     }
 

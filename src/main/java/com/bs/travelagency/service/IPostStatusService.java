@@ -13,7 +13,7 @@ public interface IPostStatusService {
 
     List<StatusDTO> findByUserEmail(String email);
 
-    public Status findById(Long postId);
+    public Status findById(int postId);
 
     public void updatePost(StatusDTO statusDTO, HttpServletRequest request);
 

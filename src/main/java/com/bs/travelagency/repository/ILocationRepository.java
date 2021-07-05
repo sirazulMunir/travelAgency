@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository(value = "locationRepository")
-public interface ILocationRepository extends JpaRepository<Location, Long> {
+public interface ILocationRepository extends JpaRepository<Location, Integer> {
 }
