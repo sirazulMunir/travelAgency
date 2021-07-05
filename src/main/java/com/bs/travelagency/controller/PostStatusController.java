@@ -151,5 +151,47 @@ public class PostStatusController {
         model.addAttribute("postId", statusDTO.getPostId());
         return "editPost";
     }
+
+    /**
+     * Get post privacy by postId
+     *
+     * @param postId : Long
+     * @param model  : Model
+     */
+    @GetMapping(value = "/changePrivacy/{postId}")
+    public String changePrivacy(@PathVariable Long postId, Model model) {
+        logger.info("Get post privacy");
+        Status status = postStatusService.findById(postId);
+        model.addAttribute("postId", status.getId());
+        model.addAttribute("post", status.getPost());
+        model.addAttribute("privacy", status.getPostPrivacy());
+        return "changePrivacy";
+    }
+
+
+    /**
+     * Update post privacy
+     *
+     * @param statusDTO : StatusDTO
+     *                  5z6
+     */
+    @PostMapping(value = "/updatePrivacy")
+    public String updatePrivacy(StatusDTO statusDTO, HttpServletRequest request, Model model) {
+        logger.info("Edit post privacy");
+        boolean isValid = true;
+        if (statusDTO.getPostPrivacy() == -1) {
+            isValid = false;
+            model.addAttribute("error", "Privacy must be selected");
+        }
+
+        if (isValid) {
+            postStatusService.updatePrivacy(statusDTO, request);
+            logger.info("Post privacy successfully updated");
+            return "redirect:/personalPosts";
+        }
+
+        model.addAttribute("postId", statusDTO.getPostId());
+        return "changePrivacy";
+    }
     //endregion
 }
